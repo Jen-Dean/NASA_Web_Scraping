@@ -24,8 +24,8 @@ def mars_scrape():
     latest_para = all_news_para[0].get_text()
 
     mars_data = {
-    "Latest Title": latest_title,
-    "Latest Para" : latest_para
+    "latest_title": latest_title,
+    "latest_para" : latest_para
     }
 
     browser.quit()
