@@ -11,7 +11,32 @@ def init_browser():
 
 def mars_scrape():
 
-    ##### HTML TABLE SCRAPE ######
+    browser = init_browser()
+    url = "https://mars.nasa.gov/news/"
+    browser.visit(url)
+
+    html = browser.html
+    soup = bs(html, "html.parser")
+
+    all_news_title = soup.find_all("div", class_="content_title")
+    latest_title = news_title[1].find("a").get_text()
+
+    all_news_para = soup.find_all("div", class_="article_teaser_body")
+    latest_para = all_news_para[0].get_text()
+
+    mars_data = {
+    "latest_title": latest_title,
+    "latest_para" : latest_para,
+    "html_table": html_table,
+    "image_scrape": image_scrape,
+    "hemi_scrape": hemi_scrape
+    }
+
+    browser.quit()
+
+    return mars_data
+
+def table_scrape():
 
     url = "https://space-facts.com/mars/"
 
@@ -24,24 +49,13 @@ def mars_scrape():
     html_table = mars_table.to_html()
     html_table = html_table.replace('\n', '')
 
-    ##### LATEST NEWS SCRAPE ######
+    html_table = {
+        "html_table": html_table
+        } ############{{ myvariable|safe }}###########
 
-    browser = init_browser()
-    url = "https://mars.nasa.gov/news/"
-    browser.visit(url)
+    return html_table
 
-    html = browser.html
-    soup = bs(html, "html.parser")
-
-    all_news_title = soup.find_all("div", class_="content_title")
-    latest_title = all_news_title[1].find("a").get_text()
-
-    all_news_para = soup.find_all("div", class_="article_teaser_body")
-    latest_para = all_news_para[0].get_text()
-
-    browser.quit()
-
-    ##### FEATURED IMAGE SCRAPE ######
+def featured_image_scrape():
 
     browser = init_browser()
     url = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
@@ -58,11 +72,17 @@ def mars_scrape():
     soup = bs(html, "html.parser")
 
     url = soup.find("img", class_="main_image")["src"]
-    featured_image_url = "https://www.jpl.nasa.gov" + url
+    image_url = "https://www.jpl.nasa.gov" + url
 
     browser.quit()
 
-    ##### HEMISPHERE IMAGE SCRAPE ######
+    image_scrape = {
+        "featured_image": image_url
+    }
+
+    return image_scrape
+
+def hemi_scrape():
 
     browser = init_browser()
     url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
@@ -90,15 +110,4 @@ def mars_scrape():
 
     browser.quit()
 
-    ##### FINAL DICTIONARY ######
-
-    mars_data = {
-    "latest_title": latest_title,
-    "latest_para" : latest_para,
-    "html_table": html_table,
-    "featured_image": featured_image_url,
-    "hemi_scrape": hemi_scrape
-    }
-
-
-    return mars_data
+    return hemi_scrape

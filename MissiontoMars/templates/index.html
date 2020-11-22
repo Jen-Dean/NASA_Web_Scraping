@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mission to Mars</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="jumbotron text-center">
+            <h1>What's up with Mars?</h1>
+            <p>Click the button below to get the latest information about Mars via NASA's website:</p>
+            <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Click Me!</a></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Latest Mars News:</h1>
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title"> {{ mars_data.latest_title }} </h4>
+                    <h6 class="card-subtitle mb-2 text-muted"> {{ mars_data.latest_para }} </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h1>Featured NASA Image</h1>
+                <img src='{{ mars_data.featured_image }}' class="img-fluid" alt="Featured Image from NASA">
+            </div>
+            <div class="col-lg-6">
+                <h1>Mars Statistics:</h1>
+                <table class="table" {{ mars_data.html_table|safe }} ></table>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="container text-center">
+        <div class="row">
+            <h1>Mars Hemispheres</h1>
+            <div class="row">
+
+                {% for dict in mars_data.hemi_scrape %}
+
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ dict.title }}</h4>
+                            <img src='{{ dict.image_url }}' class="img-fluid" alt={{ dict.title }}>
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
