@@ -31,3 +31,8 @@ def mars_scrape():
     browser.quit()
 
     return mars_data
+
+def table_scrape():
+
+def hemi_scrape():
+    
