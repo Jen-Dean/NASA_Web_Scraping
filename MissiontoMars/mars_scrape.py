@@ -30,6 +30,8 @@ def mars_scrape():
     url = "https://mars.nasa.gov/news/"
     browser.visit(url)
 
+    time.sleep(2)
+
     html = browser.html
     soup = bs(html, "html.parser")
 
