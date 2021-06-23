@@ -45,24 +45,28 @@ def mars_scrape():
 
     ##### FEATURED IMAGE SCRAPE ######
 
-    browser = init_browser()
-    url = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
-    browser.visit(url)
+    # browser = init_browser()
+    # url = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
 
-    html = browser.html
-    soup = bs(html, "html.parser")
+    # ####### NEWURL = "https://spaceimages-mars.com/"
+    
+    # browser.visit(url)
 
-    browser.find_by_id('full_image').click()
+    # html = browser.html
+    # soup = bs(html, "html.parser")
 
-    browser.find_by_text("more info     ").click()
+    # browser.find_by_id('full_image').click()
+    
+    # browser.find_by_text("more info     ").click()
 
-    html = browser.html
-    soup = bs(html, "html.parser")
 
-    url = soup.find("img", class_="main_image")["src"]
-    featured_image_url = "https://www.jpl.nasa.gov" + url
+    # html = browser.html
+    # soup = bs(html, "html.parser")
 
-    browser.quit()
+    # url = soup.find("img", class_="main_image")["src"]
+    # featured_image_url = "https://www.jpl.nasa.gov" + url
+
+    # browser.quit()
 
     ##### HEMISPHERE IMAGE SCRAPE ######
 
@@ -98,7 +102,7 @@ def mars_scrape():
     "latest_title": latest_title,
     "latest_para" : latest_para,
     "html_table": html_table,
-    "featured_image": featured_image_url,
+    #"featured_image": featured_image_url,
     "hemi_scrape": hemi_scrape
     }
 
